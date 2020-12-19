@@ -1,6 +1,9 @@
 // var showself
 // var showself1
 // var showself2
+var showsave
+var showclose
+var showcheck
 
 var Checkin = function() {
     this.ele = $(".checkin")
@@ -12,7 +15,11 @@ var Checkin = function() {
         radius: 10,
         color: '#000000',
         padding: 10,
-        dateArray: [3, 5, 10, 15]
+        dateArray: [3, 5, 10, 15],
+        records: {
+            3:"Hello",
+            5:"Hi"
+        }
     }
     this.isChecked = false
     this.obj = this.defaults
@@ -77,18 +84,18 @@ Checkin.prototype = {
             borderRadius: this.obj.radius,
             color: this.obj.color,
             padding: this.obj.padding
-        }).append("<div class='title'><p>" + text + "</p><a class=\'checkBtn\' href=\"javascript:\">Check In</a></div>")
+        }).append("<div class='title'><p>" + text + "</p><a class='checkBtn' href='javascript:'>Check In</a></div>")
         $("<ul class='week clearfix'></ul><ul class='calendarList clearfix'></ul>").appendTo(_self)
         //showself1 = _self
         for (var i = 0; i < 7; i++) {
-            _self.find(".week").append("<li>" + week[i] + "</li>")
+            $(".week").append("<li>" + week[i] + "</li>")
         }
         for (var i = 0; i < 42; i++) {
             html += "<li></li>"
         }
-        _self.find(".calendarList").append(html)
-        var liEle = _self.find(".calendarList").find("li")
-        _self.find(".week li").css({
+        $(".calendarList").append(html)
+        var liEle = $(".calendarList").find("li")
+        $(".week li").css({
             width: (_self.width() / 7) + 'px',
             height: 50 + 'px',
             borderRight: '1px solid #000000',
@@ -104,8 +111,8 @@ Checkin.prototype = {
             boxSizing: 'border-box',
             color: "#000000"
         })
-        _self.find(".calendarList").find("li:nth-child(7n)").css('borderRight', 'none')
-        _self.find(".week li:nth-child(7n)").css('borderRight', 'none')
+        $(".calendarList").find("li:nth-child(7n)").css('borderRight', 'none')
+        $(".week li:nth-child(7n)").css('borderRight', 'none')
         var firstIndent = new Date(year, month, 1).getDay()
         //console.log("firstIndent: "+ firstIndent)
         var lastDay = new Date(year, (month + 1), 0)
@@ -121,16 +128,20 @@ Checkin.prototype = {
                         // console.log("i: "+i)
                         // console.log("i+ firstIndent: "+(i+ firstIndent))
                         liEle.eq(i + firstIndent).addClass('checked')
+                        liEle.eq(i + firstIndent).prop('title', this.obj.records[i+1]);                    
                     }
                 }
             }
         }
     
-        _self.find($(".day" + day)).addClass('able-checkin')
+        $($(".day" + day)).addClass('able-checkin')
     },
-    modal : function(e) {
-        var mask = e.parents().find(".mask")
-        var close = e.parents().find(".closeBtn")
+    modal : function() {
+        var defaults = this.defaults
+        // console.log("defaults: "+ defaults)
+        var mask = $(".mask")
+        var close = $(".closeBtn")
+        showclose = close
         if (mask && !this.isChecked) {
             mask.addClass('trf')
             this.isChecked = true
@@ -141,37 +152,68 @@ Checkin.prototype = {
             event.preventDefault()
             mask.removeClass('trf')
         })
-        e.parents().find('.checkBtn').text("Checked In")
+        $('.checkBtn').text("Checked In")
 
         const divform = document.createElement('div')
         const textbox = document.createElement('form')
+        const saveBtn = document.createElement('button')
         $(divform).addClass("form")
-		$(textbox).append("<label class='boxtitle'>record your mood today</label> <textarea class='box'></textarea>")
+		$(textbox).append("<label class='textboxTitle'>record your mood today</label> <textarea class='box'></textarea>")
         $(divform).append(textbox)
-        $(divform).append("<a class=\'saveBtn\' href=\"javascript:\">Save</a>")
-		const modal = $('.modal') // jQuery equivalent to: const body = document.querySelector('body')
+        $(saveBtn).addClass("saveBtn")
+        saveBtn.onclick = function(){
+            console.log("clicked save")
+            mask.removeClass('trf')
+            var day = new Date().getDate()
+            if ($(".box").val() != ""){
+                defaults.records[day] = $(".box").val()
+                $(".day"+day).prop('title', $(".box").val());     
+            }
+            console.log(defaults.records)
+        }
+        saveBtn.innerHTML = "Save"
+        $(divform).append(saveBtn)
+		const modal = $('.modal') 
 		modal.append(divform)
         
     },
     events : function() {
         var cachedThis = this    //https://stackoverflow.com/questions/9749969/in-javascript-how-can-i-call-one-prototype-method-in-another-prototype-method
         var _self = this.ele
-        var liEle = _self.find(".calendarList").find("li")
-        liEle.on('click', function(event) {
+        var defaults = this.defaults
+        var liEle = $(".calendarList").find("li")
+        liEle.click(function(event) {
             event.preventDefault()
-            /* Act on the event */
-            if ($(this).hasClass('able-checkin')) {
-                $(this).addClass('checked')
+            //not checked in
+            if ($(this).hasClass('able-checkin') && !$(this).hasClass('checked')) {
+                $(this).addClass('checked')    
                 cachedThis.modal(_self)
                 this.isChecked = true
+                var day = new Date().getDate()
+                if (!defaults.dateArray.includes(day))
+                    defaults.dateArray.push(day)
+                console.log(defaults.dateArray)
+            }//has checked in
+            else{
+                console.log("checked")
             }
         })
-        var checkBtn = _self.find(".checkBtn")
+        var checkBtn = $(".checkBtn")
+        showcheck = checkBtn
         checkBtn.click(function() {
-            cachedThis.modal(_self)
-            _self.find('.able-checkin').addClass('checked')
-            this.isChecked = true
+            if (!$('.able-checkin').hasClass('checked')) {
+                cachedThis.modal(_self)
+                $('.able-checkin').addClass('checked')
+                this.isChecked = true
+                var day = new Date().getDate()
+                if (!defaults.dateArray.includes(day))
+                    defaults.dateArray.push(day)
+                console.log(defaults.dateArray)
+            }
+            else
+                console.log("already checked")
         })
+
     } 
 }
 

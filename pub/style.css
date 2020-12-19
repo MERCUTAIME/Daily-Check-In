@@ -177,7 +177,7 @@ form{
     height: 75%;
     resize: none;
 }
-a.saveBtn{
+button.saveBtn{
     display: inline-block;
     width: 20%;
     height: 30px;

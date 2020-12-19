@@ -1,35 +1,48 @@
 // var showself
 // var showself1
 // var showself2
-var showsave
-var showclose
-var showcheck
+// var showsave
+// var showclose
+// var showcheck
 
 var Checkin = function() {
-    this.ele = $(".checkin")
-    //calendar appearance
-    this.defaults = {
-        width: 450,
-        height: 'auto',
-        background: '#d8efff',
-        radius: 10,
-        color: '#000000',
-        padding: 10,
-        dateArray: [3, 5, 10, 15],
-        records: {
-            3:"Hello",
-            5:"Hi"
-        }
-    }
+
+    this.defaults = {}
     this.isChecked = false
     this.obj = this.defaults
+    this.calendars = []
 
 }
 
 Checkin.prototype = {
 
     init : function() {
-        var _self = this.ele,
+
+        const checkin = document.createElement('div')
+        $(checkin).addClass("checkin")
+        const body = $('body')
+        body.append(checkin)
+
+        elements = $(checkin)
+        //calendar appearance
+        this.defaults = {
+            width: 450,
+            height: 450,
+            background: '#d8efff',
+            radius: 10,
+            color: '#000000',
+            padding: 10,
+            dateArray: [3, 5, 10, 15],
+            records: {
+                3:"Hello",
+                5:"Hi"
+            }
+        }
+        this.isChecked = false
+        this.obj = this.defaults
+
+
+        var _self = elements,
             html = '',
             currentDate = new Date(),
             year = currentDate.getFullYear(),
@@ -76,7 +89,8 @@ Checkin.prototype = {
                     text = "December"
                     break
             }
-        //showself = _self
+        
+        
         _self.css({
             width: this.obj.width + 'px',
             height: this.obj.height,
@@ -85,7 +99,7 @@ Checkin.prototype = {
             color: this.obj.color,
             padding: this.obj.padding
         }).append("<div class='title'><p>" + text + "</p><a class='checkBtn' href='javascript:'>Check In</a></div>")
-        $("<ul class='week clearfix'></ul><ul class='calendarList clearfix'></ul>").appendTo(_self)
+        $("<ul class='week'></ul><ul class='calendarList'></ul>").appendTo(_self)
         //showself1 = _self
         for (var i = 0; i < 7; i++) {
             $(".week").append("<li>" + week[i] + "</li>")
@@ -135,8 +149,38 @@ Checkin.prototype = {
         }
     
         $($(".day" + day)).addClass('able-checkin')
+        this.calendars.push(checkin)
+        
+        
     },
-    modal : function() {
+    changeBackground: function(color){
+        for (var i=0; i<$(".checkin").length; i++ )
+            $(".checkin")[i].style.backgroundColor = color
+    },
+    changeCheckedColor: function(color){
+        for (var i=0; i<$("li.checked").length; i++ )
+            $("li.checked")[i].style.backgroundColor = color
+    },
+    changeTodayColor: function(color){
+        for (var i=0; i<$("li.able-checkin").length; i++ )
+            $("li.able-checkin")[i].style.backgroundColor = color
+    },
+    changeBtnColor: function(color){
+        for (var i=0; i<$(".title a").length; i++ )
+            $(".title a")[i].style.backgroundColor = color
+    },
+    changeCalColor: function(color){
+        var cachedThis = this
+        var oldChecked = $("li.checked")[0].style.backgroundColor
+        var oldToday = $("li.able-checkin")[0].style.backgroundColor
+        for (var i=0; i<$(".checkin li").length; i++ ){
+            $(".checkin li")[i].style.backgroundColor = color
+        }
+        cachedThis.changeCheckedColor(oldChecked)
+        cachedThis.changeTodayColor(oldToday)
+
+    },
+    modal: function() {
         var defaults = this.defaults
         // console.log("defaults: "+ defaults)
         var mask = $(".mask")
@@ -177,9 +221,9 @@ Checkin.prototype = {
 		modal.append(divform)
         
     },
-    events : function() {
+    events: function() {
         var cachedThis = this    //https://stackoverflow.com/questions/9749969/in-javascript-how-can-i-call-one-prototype-method-in-another-prototype-method
-        var _self = this.ele
+        var _self = $(".checkin")
         var defaults = this.defaults
         var liEle = $(".calendarList").find("li")
         liEle.click(function(event) {

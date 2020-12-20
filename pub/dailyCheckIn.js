@@ -183,20 +183,20 @@
             cachedThis.changeTodayColor(oldToday)
 
         },
-        modal: function() {
+        cover: function() {
             var defaults = this.defaults
             // console.log("defaults: "+ defaults)
-            var mask = $(".mask")
+            var dark = $(".dark")
             var close = $(".closeBtn")
-            if (mask && !this.isChecked) {
-                mask.addClass('trf')
+            if (dark && !this.isChecked) {
+                dark.addClass('trf')
                 this.isChecked = true
             } else {
                 return
             }
             close.click(function(event) {
                 event.preventDefault()
-                mask.removeClass('trf')
+                dark.removeClass('trf')
             })
             $('.checkBtn').text("Checked In")
 
@@ -209,7 +209,7 @@
             $(saveBtn).addClass("saveBtn")
             saveBtn.onclick = function(){
                 console.log("clicked save")
-                mask.removeClass('trf')
+                dark.removeClass('trf')
                 var day = new Date().getDate()
                 if ($(".box").val() != ""){
                     defaults.records[day] = $(".box").val()
@@ -219,8 +219,8 @@
             }
             saveBtn.innerHTML = "Save"
             $(divform).append(saveBtn)
-            const modal = $('.modal') 
-            modal.append(divform)
+            const cover = $('.cover') 
+            cover.append(divform)
             
         },
         events: function() {
@@ -233,7 +233,7 @@
                 //not checked in
                 if ($(this).hasClass('able-checkin') && !$(this).hasClass('checked')) {
                     $(this).addClass('checked')    
-                    cachedThis.modal(_self)
+                    cachedThis.cover(_self)
                     this.isChecked = true
                     var day = new Date().getDate()
                     if (!defaults.dateArray.includes(day))
@@ -247,7 +247,7 @@
             const checkBtn = $(".checkBtn")
             checkBtn.click(function() {
                 if (!$('.able-checkin').hasClass('checked')) {
-                    cachedThis.modal(_self)
+                    cachedThis.cover(_self)
                     $('.able-checkin').addClass('checked')
                     this.isChecked = true
                     var day = new Date().getDate()

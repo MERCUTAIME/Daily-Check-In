@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>DailyCheckIn Documentation</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <body>
+        <p class="text"><b>Getting Started</b></p>
+        <p class="text">DailyCheckIn library is a calendar generating library which is depended on jQuery.</p>
+        <p class="text">The calendar is generated automatically based on the current month and the current date. It will change every day and month by itself.</p>
+        <p class="text">One can either use the "check in" button or click on the date to check in.</p>
+        <p class="text">When hovering over checked in days, previous records of that day will show up if exists.</p>
+        
+        <p class = "text"><b>Basic Setup</b></p>
+        <pre>
+            <code>
+                var checkin = new Checkin()
+                checkin.init()
+                checkin.events()
+            </code>
+        </pre>
+        <p class = "text"><b>API</b></p>
+        <table>
+            <tr>
+              <th>Property</th>
+              <th>Default</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>elements</td>
+              <td>$(".checkin")</td>
+              <td>HTMLdivElement</td>
+              <td>A CSS selector for the HTMLdivElement itself (e.g. document.querySelector(".checkin")) that will be used for the calendar generation.</td>
+            </tr>
+            <tr>
+              <td>width</td>
+              <td>450px</td>
+              <td>Int</td>
+              <td>The width of the calendar.</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>450px</td>
+                <td>Int</td>
+                <td>The height of the calendar.</td>
+            </tr>
+            <tr>
+                <td>background</td>
+                <td>'#d8efff'</td>
+                <td>String</td>
+                <td>The background color of the calendar.</td>
+            </tr>
+            <tr>
+                <td>radius</td>
+                <td>10</td>
+                <td>Int</td>
+                <td>The border radius of the calendar.</td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>'#000000'</td>
+                <td>String</td>
+                <td>The text color of the calendar.</td>
+            </tr>
+            <tr>
+                <td>padding</td>
+                <td>10</td>
+                <td>Int</td>
+                <td>The padding of the calendar.</td>
+            </tr>
+            <tr>
+                <td>dataArray</td>
+                <td>/</td>
+                <td>Array</td>
+                <td>It stores the dates that the user checked in of this month.</td>
+            </tr>
+            <tr>
+              <td>records</td>
+              <td>/</td>
+              <td>Dictionary</td>
+              <td>It stores the recorded texts from previous checked in days.</td>
+            </tr>
+            <tr>
+              <td>week</td>
+              <td>Array</td>
+              <td>['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</td>
+              <td>The texts that represent days of a week.</td>
+            </tr>
+            
+          </table>
+
+          <p class = "text"><b>Functions</b></p>
+          <table>
+            <tr>
+              <th>Function</th>
+              <th>Argument</th>
+              <th>Behaviour</th>
+              <th>Return Value</th>
+            </tr>
+            <tr>
+                <th>Checkin</th>
+                <th>/</th>
+                <th>This is the constructor of DailyCheckIn.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>init</th>
+                <th>/</th>
+                <th>It initiates a new calendar and adds to the HTML body.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>changeBackground</th>
+                <th>color</th>
+                <th>It changes the background color of the calendar to the specified color.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>changeCheckedColor</th>
+                <th>color</th>
+                <th>It changes the color of the checked dates to the specified color.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>changeTodayColor</th>
+                <th>color</th>
+                <th>It changes the color of the current date to the specified color.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>changeBtnColor</th>
+                <th>color</th>
+                <th>It changes the color of the "check in button" to the specified color.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>changeCalColor</th>
+                <th>color</th>
+                <th>It changes the color of the normal dates, which are neither checked in nor can be checked in, to the specified color.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>modal</th>
+                <th>/</th>
+                <th>It sets up the popup that occurs when checked in.</th>
+                <th>/</th>
+            </tr>
+            <tr>
+                <th>events</th>
+                <th>/</th>
+                <th>It adds eventListeners to all the buttons.</th>
+                <th>/</th>
+            </tr>
+          </table>
+
+    </body>
+
+</head>
+
+</html>

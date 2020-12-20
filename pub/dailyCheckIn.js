@@ -37,8 +37,8 @@
                 padding: 10,
                 dateArray: [3, 5, 10, 15],
                 records: {
-                    3:"Hello",
-                    5:"Hi"
+                    3:"Breakfast: Cereal with 1% milk, Half a grapefruit, Coffee. Lunch: Green salad: Lattuce, Tomatoes, shredded Cheddar Cheese, 1/2 cup of grilled chicken, Water.",
+                    5:"Today I learned to never skip wearing glasses when reading a recipe. My enthusiasm for baking hasn’t wained a bit despite the firemen’s sudden appearance."
                 }
             }
             this.isChecked = false

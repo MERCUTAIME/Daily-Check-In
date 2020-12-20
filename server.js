@@ -29,6 +29,14 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, './pub', 'examples.html'));
 })
 
+app.get('/index', (req, res) => {
+	res.sendFile(path.join(__dirname, '/pub/example.html'))
+})
+
+app.get('/documentation', (req, res) => {
+	res.sendFile(path.join(__dirname, '/pub/documentation.html'))
+})
+
 
 // will use an 'environmental variable', process.env.PORT, for deployment.
 const port = process.env.PORT || 5000

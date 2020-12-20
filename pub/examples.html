@@ -58,4 +58,45 @@
         </div>
     </div>
 
+    <p class = "text"> One can either use the "check in" button or click on the date to check in. </p>
+    <p class = "text"> The calendar is generated automatically based on the current month and the current date. It will change every day and month by itself.</p>
+    <p class = "text"> When hovering over checked in days, previous records of that day will show up if exists. (I this example, it's Dec 3 and 5.)</p>
+
+    <p class = "text"><b>JS</b></p>
+    <pre>
+        <code>
+            var checkin = new Checkin({
+                this.defaults = {
+                    width: 450,
+                    height: 450,
+                    background: '#d8efff',
+                    radius: 10,
+                    color: '#000000',
+                    padding: 10,
+                    dateArray: [3, 5, 10, 15],
+                    records: {
+                        3:"Breakfast: Cereal with 1% milk, Half a grapefruit, Coffee. 
+                            Lunch: Green salad: Lattuce, Tomatoes, shredded Cheddar Cheese, 1/2 cup of grilled chicken, Water.",
+                        5:"Today I learned to never skip wearing glasses when reading a recipe. 
+                            My enthusiasm for baking hasn’t wained a bit despite the firemen’s sudden appearance."
+                    }
+                }    
+            })
+        </code>
+      </pre>
+
+      <p class = "text"><b>HTML</b></p>
+      <pre>
+        <code>
+            &lt;div class="mask"&gt;
+            &lt;div class="modal"&gt;
+            &lt;a href="#" class="closeBtn"&gt;×&lt;/a&gt;
+            &lt;h1 class="title_h1 clearfix"&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;Checked In&lt;/em&gt;&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;
+        </code>
+        </pre>
+
+        <p class="text"><a href="documentation.html">Documentation</a></p>
+     
 </html>

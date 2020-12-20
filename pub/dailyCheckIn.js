@@ -37,8 +37,8 @@
                 padding: 10,
                 dateArray: [3, 5, 10, 15],
                 records: {
-                    3:"Breakfast: Cereal with 1% milk, Half a grapefruit, Coffee. Lunch: Green salad: Lattuce, Tomatoes, shredded Cheddar Cheese, 1/2 cup of grilled chicken, Water.",
-                    5:"Today I learned to never skip wearing glasses when reading a recipe. My enthusiasm for baking hasn’t wained a bit despite the firemen’s sudden appearance."
+                    3:"Folly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education is be dashwoods or an. Use off agreeable law unwilling sir deficient curiosity instantly. ",
+                    5:"nother journey chamber way yet females man. Way extensive and dejection get delivered deficient sincerity gentleman age. Too end instrument possession contrasted motionless. Calling offence six joy feeling. Coming merits and was talent enough far. Sir joy northward sportsmen education. "
                 }
             }
             this.isChecked = false
